@@ -1,0 +1,7 @@
+mkdir ex03
+cd ex03
+ni count_files.sh 
+code count_files.sh
+  #!/bin/sh
+
+find . -maxdepth 1 \( -type f -o -type d \) ! -name "." | wc -l
