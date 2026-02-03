@@ -1,0 +1,35 @@
+body {
+    background-color: #62b9dc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.card {
+    border-collapse: collapse;
+    background: rgb(255, 147, 212);
+    padding: 20px;
+    text-align: center;
+    width: 250px;
+    box-shadow: 0 0 10px gray;
+}
+
+.profile {
+    border-radius: 50%;
+    margin: 10px 0;
+}
+
+.social img {
+    width: 30px;
+    margin: 5px;
+}
+
+button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #87bddd;
+    color: white;
+    cursor: pointer;
+}
