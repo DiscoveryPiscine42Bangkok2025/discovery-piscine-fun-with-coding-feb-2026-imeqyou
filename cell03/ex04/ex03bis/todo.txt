@@ -1,0 +1,64 @@
+let todos = [];
+
+/* ===== SAVE COOKIE ===== */
+function saveCookie() {
+    document.cookie = "todos=" + JSON.stringify(todos) + "; path=/";
+}
+
+/* ===== GET COOKIE ===== */
+function getCookie(name) {
+    let cookies = document.cookie.split(";");
+
+    for (let c of cookies) {
+        let [key, value] = c.trim().split("=");
+        if (key === name) return value;
+    }
+    return null;
+}
+
+/* ===== LOAD COOKIE ===== */
+function loadCookie() {
+    let data = getCookie("todos");
+
+    if (data) {
+        todos = JSON.parse(data);
+        todos.forEach(addTodoToDOM);
+    }
+}
+
+/* ===== ADD TO DOM ===== */
+function addTodoToDOM(text) {
+
+    let div = $("<div></div>")
+        .addClass("todo")
+        .text(text);
+
+    div.click(function () {
+        if (confirm("Delete this TO DO?")) {
+            todos = todos.filter(t => t !== text);
+            div.remove();
+            saveCookie();
+        }
+    });
+
+    $("#ft_list").prepend(div);
+}
+
+/* ===== NEW TODO ===== */
+function newTodo() {
+
+    let text = prompt("New TO DO:");
+    if (!text) return;
+
+    todos.unshift(text);
+    addTodoToDOM(text);
+    saveCookie();
+}
+
+/* โหลดตอนเปิดเว็บ + ผูก event */
+$(document).ready(function () {
+
+    $("#newBtn").click(newTodo);
+
+    loadCookie();
+});
