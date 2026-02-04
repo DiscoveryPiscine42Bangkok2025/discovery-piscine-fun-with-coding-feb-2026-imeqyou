@@ -1,11 +1,10 @@
 let todos = [];
 
-/* ===== SAVE COOKIE ===== */
+
 function saveCookie() {
     document.cookie = "todos=" + JSON.stringify(todos) + "; path=/";
 }
 
-/* ===== GET COOKIE ===== */
 function getCookie(name) {
     let cookies = document.cookie.split(";");
 
@@ -16,7 +15,6 @@ function getCookie(name) {
     return null;
 }
 
-/* ===== LOAD COOKIE ===== */
 function loadCookie() {
     let data = getCookie("todos");
 
@@ -26,7 +24,6 @@ function loadCookie() {
     }
 }
 
-/* ===== ADD TO DOM ===== */
 function addTodoToDOM(text) {
 
     let div = document.createElement("div");
@@ -44,7 +41,6 @@ function addTodoToDOM(text) {
     document.getElementById("ft_list").prepend(div);
 }
 
-/* ===== NEW TODO ===== */
 function newTodo() {
 
     let text = prompt("New TO DO:");
@@ -55,5 +51,4 @@ function newTodo() {
     saveCookie();
 }
 
-/* โหลดตอนเปิดเว็บ */
 loadCookie();
