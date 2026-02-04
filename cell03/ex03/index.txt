@@ -1,43 +1,39 @@
-let todos = [];
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To Do</title>
 
-function saveData() {
-    localStorage.setItem("todos", JSON.stringify(todos));
-}
-
-function loadData() {
-    let data = localStorage.getItem("todos");
-
-    if (data) {
-        todos = JSON.parse(data);
-        todos.forEach(addTodoToDOM);
-    }
-}
-
-function addTodoToDOM(text) {
-
-    let div = document.createElement("div");
-    div.className = "todo";
-    div.innerText = text;
-
-    div.onclick = function () {
-        if (confirm("Delete this TO DO?")) {
-            todos = todos.filter(t => t !== text);
-            div.remove();
-            saveData();
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
         }
-    };
 
-    document.getElementById("ft_list").prepend(div);
-}
+        #ft_list {
+            width: 300px;
+            margin: 20px auto;
+            border: 2px solid black;
+            padding: 10px;
+            min-height: 200px;
+            background: white;
+        }
 
-function newTodo() {
+        .todo {
+            background: lightblue;
+            margin: 5px;
+            padding: 8px;
+            cursor: pointer;
+        }
+    </style>
+</head>
 
-    let text = prompt("New TO DO:");
-    if (!text) return;
+<body>
 
-    todos.unshift(text);
-    addTodoToDOM(text);
-    saveData();
-}
-loadData();
+<button onclick="newTodo()">New</button>
+<div id="ft_list"></div>
+
+<script src="todo.js"></script>
+
+</body>
+</html>
 
