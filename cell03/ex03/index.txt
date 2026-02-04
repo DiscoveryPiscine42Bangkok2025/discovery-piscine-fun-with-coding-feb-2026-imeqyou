@@ -1,38 +1,49 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>To Do</title>
+let todos = [];
 
-    <style>
-        body {
-            font-family: Arial;
-            text-align: center;
+/* ===== SAVE DATA ===== */
+function saveData() {
+    localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+/* ===== LOAD DATA ===== */
+function loadData() {
+    let data = localStorage.getItem("todos");
+
+    if (data) {
+        todos = JSON.parse(data);
+        todos.forEach(addTodoToDOM);
+    }
+}
+
+/* ===== ADD TO DOM ===== */
+function addTodoToDOM(text) {
+
+    let div = document.createElement("div");
+    div.className = "todo";
+    div.innerText = text;
+
+    div.onclick = function () {
+        if (confirm("Delete this TO DO?")) {
+            todos = todos.filter(t => t !== text);
+            div.remove();
+            saveData();
         }
+    };
 
-        #ft_list {
-            width: 300px;
-            margin: 20px auto;
-            border: 2px solid black;
-            padding: 10px;
-            min-height: 200px;
-            background: white;
-        }
+    document.getElementById("ft_list").prepend(div);
+}
 
-        .todo {
-            background: lightblue;
-            margin: 5px;
-            padding: 8px;
-            cursor: pointer;
-        }
-    </style>
-</head>
+/* ===== NEW TODO ===== */
+function newTodo() {
 
-<body>
+    let text = prompt("New TO DO:");
+    if (!text) return;
 
-<button onclick="newTodo()">New</button>
-<div id="ft_list"></div>
+    todos.unshift(text);
+    addTodoToDOM(text);
+    saveData();
+}
 
-<script src="todo.js"></script>
+/* โหลดตอนเปิดเว็บ */
+loadData();
 
-</body>
-</html>
