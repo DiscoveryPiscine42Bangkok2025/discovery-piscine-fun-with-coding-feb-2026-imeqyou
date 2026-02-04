@@ -55,10 +55,8 @@ function calc() {
     console.log(result);
 }
 
-/* event ปุ่ม */
 $("#btn").click(calc);
 
-/* popup ทุก 30 วินาที */
 setInterval(function(){
     alert("Please, use me...");
 }, 30000);
